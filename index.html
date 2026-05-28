@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systemutvikling – Læresystem (IDATT1005)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#app">Hopp til innhold</a>
+  <header class="topbar">
+    <button class="brand" data-route="#/" aria-label="Hjem">
+      <span class="brand-logo">SU</span>
+      <span class="brand-text">Systemutvikling<small>IDATT1005</small></span>
+    </button>
+    <nav class="mainnav" id="mainnav">
+      <a href="#/laer" data-match="laer">Lær</a>
+      <a href="#/quiz" data-match="quiz">Quiz</a>
+      <a href="#/flashcards" data-match="flashcards">Flashcards</a>
+      <a href="#/uml" data-match="uml">UML</a>
+      <a href="#/eksamen" data-match="eksamen">Eksamen</a>
+    </nav>
+    <div class="topbar-right">
+      <span class="countdown" id="countdown" title="Tid til eksamen"></span>
+      <button class="bridge-status off" id="bridgeStatus" type="button" title="Claude-retting er av – klikk for å se hvordan du slår den på">
+        <span class="bs-dot"></span><span class="bs-label">Claude av</span>
+      </button>
+      <button class="icon-btn" id="themeToggle" aria-label="Bytt tema">◐</button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Meny">☰</button>
+    </div>
+  </header>
+
+  <main id="app" class="app"></main>
+
+  <footer class="footer">
+    <span>Læresystem for IDATT1005 Systemutvikling · eksamen 3. juni 2026</span>
+    <button class="link-btn" id="resetBtn">Nullstill fremdrift</button>
+  </footer>
+
+  <!-- Bibliotek (offline) -->
+  <script src="js/mermaid.min.js"></script>
+
+  <!-- Data (lett å utvide: legg til flere objekter i array-ene) -->
+  <script src="data/summaries.js"></script>
+  <script src="data/flashcards.js"></script>
+  <script src="data/quizzes.js"></script>
+  <script src="data/uml.js"></script>
+  <script src="data/exams.js"></script>
+
+  <!-- Logikk -->
+  <script src="js/progress.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/uml.js"></script>
+  <script src="js/exam.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>
