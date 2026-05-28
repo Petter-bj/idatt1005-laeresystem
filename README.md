@@ -3,13 +3,15 @@
 Et offline, interaktivt læresystem for eksamensforberedelse i **IDATT1005 Systemutvikling** (NTNU).
 En **lokal nettapp** i ren HTML/CSS/JS – ingen installasjon, ingen rammeverk, ingen byggesteg.
 
+**▶ Prøv den live:** <https://petter-bj.github.io/idatt1005-laeresystem/>
+
 > Uoffisielt studiehjelpemiddel laget av en student. Innholdet er destillert fra pensum og må ikke regnes som fasit.
 
 ## Kom i gang
 
 **Alternativ 1 – bare åpne den:** last ned mappa og dobbeltklikk `index.html`. Funker helt offline.
 
-**Alternativ 2 – via GitHub Pages:** åpne den publiserte lenken (se *Settings → Pages* i repoet).
+**Alternativ 2 – via GitHub Pages:** åpne <https://petter-bj.github.io/idatt1005-laeresystem/>.
 Merk: den hostede versjonen kjører alt **unntatt** Claude-funksjonene (se under).
 
 ## Funksjoner
