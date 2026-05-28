@@ -140,9 +140,9 @@
   function updateCountdown() {
     var el = document.getElementById("countdown");
     if (!el) return;
-    var now = new Date();
-    var ms = EXAM_DATE - now;
-    if (ms <= 0) { el.textContent = "Eksamen i gang – lykke til!"; return; }
+    var ms = EXAM_DATE - new Date();
+    if (ms <= 0) { el.style.display = "none"; return; } // skjul brikken når eksamen er over
+    el.style.display = "";
     var days = Math.floor(ms / 86400000);
     var hrs = Math.floor((ms % 86400000) / 3600000);
     el.textContent = days + " d " + hrs + " t til eksamen";
