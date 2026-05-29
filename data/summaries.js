@@ -75,6 +75,15 @@ flowchart LR
   R["RED:\\nskriv test som feiler"] --> G["GREEN:\\nminimal kode som passerer"] --> F["REFACTOR:\\nrydd uten å endre oppførsel"] --> R
 </div>
 
+<h3>XP – de fem verdiene</h3>
+<p>Extreme Programming bygger på fem verdier: <strong>kommunikasjon</strong> (communication), <strong>enkelhet</strong> (simplicity), <strong>tilbakemelding</strong> (feedback), <strong>mot</strong> (courage) og <strong>respekt</strong> (respect). Praksisene (parprogrammering, TDD osv.) er måten å leve ut verdiene på.</p>
+
+<h3>Domenedrevet design (DDD)</h3>
+<p><strong>Domain-Driven Design</strong> lar koden speile domenet/virkeligheten. Sentralt: et <em>felles språk (ubiquitous language)</em> mellom utviklere og domeneeksperter, og modellering rundt domenebegreper – gir mer forståelig og vedlikeholdbar kode i komplekse domener.</p>
+
+<h3>DevOps & kodehåndtering</h3>
+<p><strong>DevOps</strong> bygger bro mellom utvikling (Dev) og drift (Ops). Kjernepraksiser: <strong>versjonskontroll</strong> (Git), <strong>kontinuerlig integrasjon (CI)</strong> og <strong>kontinuerlig leveranse/utrulling (CD)</strong> via en automatisert <em>pipeline</em> (bygg → test → deploy). Gir hyppige, trygge leveranser og passer hånd i hanske med smidig.</p>
+
 <div class="callout">
 <strong>Eksamenstips:</strong> Du blir ofte bedt om å <em>sammenligne</em> (fossefall vs. smidig, Scrum vs. Kanban) og <em>begrunne</em> et metodevalg ut fra prosjekttype. Bruk konkrete eksempler og pek på trade-offs.
 </div>
@@ -135,6 +144,23 @@ flowchart BT
 <h3>Automatisert vs. manuell · CI</h3>
 <p>Automatiske tester er <strong>deterministiske og repeterbare</strong> og kjøres ved hver endring i <strong>kontinuerlig integrasjon (CI)</strong> — sammen med smidig gir dette rask tilbakemelding. Manuell testing egner seg til utforskende og brukervennlighetstesting. <strong>Risk-poker</strong> brukes til å prioritere hvor mye man tester ut fra risiko.</p>
 
+<h3>Testfaser (en tests livssyklus)</h3>
+<ol>
+<li><strong>Oppsett (setup):</strong> klargjør testdata og starttilstand (preconditions)</li>
+<li><strong>Gjennomføring (exercise):</strong> kjør koden som testes</li>
+<li><strong>Verifisering (verify):</strong> sammenlign faktisk mot forventet resultat (assertions)</li>
+<li><strong>Opprydding (teardown):</strong> rydd opp så testen ikke påvirker den neste</li>
+</ol>
+
+<h3>Testdata, fixtures & testmiljø</h3>
+<p>Gode tester bruker <strong>deterministiske testdata</strong> og <strong>fixtures</strong> (kjent, gjenbrukbar starttilstand) i et isolert <strong>testmiljø</strong> (ikke produksjon). <strong>Dependency Injection (DI)</strong> gjør koden testbar: ved å injisere avhengigheter utenfra kan man bytte dem ut med <em>mocks/stubs</em> under testing.</p>
+
+<h3>Destruktiv testing</h3>
+<p><strong>Destruktiv testing</strong> prøver bevisst å «knekke» systemet – ugyldige input, ekstreme verdier, feil rekkefølge, manglende nettverk – for å se hvor robust det er og hvordan det feiler (graceful degradation). Motsatsen er konstruktiv testing som bekrefter at det virker som tenkt.</p>
+
+<h3>Agile Testing Quadrants</h3>
+<p>En modell (Marick/Crispin) som ordner tester langs to akser: <em>støtter teamet</em> ↔ <em>kritiserer produktet</em>, og <em>teknologivendt</em> ↔ <em>forretningsvendt</em>. Q1: enhets-/komponenttester (teknologi, støtter) · Q2: funksjonelle tester/eksempler (forretning, støtter) · Q3: utforskende/brukstester (forretning, kritiserer) · Q4: ytelse/sikkerhet/last (teknologi, kritiserer).</p>
+
 <div class="callout exam"><strong>Eksamenstips:</strong> Et klassisk spørsmål er å forklare forskjellen på enhets- og integrasjonstest, eller fordeler/utfordringer med TDD. Husk: TDD gir trygghet ved refaktorering, men krever disiplin og god testbar design.</div>
 `
 },
@@ -187,7 +213,24 @@ flowchart LR
 <li><strong>Plugin / mikrokjerne</strong> – kjerne + utvidelser</li>
 <li><strong>Peer-to-peer</strong> – likeverdige noder</li>
 <li><strong>SOA</strong> – tjenesteorientert, forløper til mikrotjenester</li>
+<li><strong>Master–slave</strong> – én master styrer/fordeler arbeid til flere slaver (f.eks. databasereplikering: master skriver, slaver leser)</li>
+<li><strong>Rør og filter (pipe-filter / pipeline)</strong> – data flyter gjennom en kjede av filtre som hver transformerer (jf. Unix-pipes og bygge-pipelines)</li>
+<li><strong>Broker (megler)</strong> – en mellommann kobler klienter og tjenester og ruter forespørsler (jf. message broker)</li>
+<li><strong>Frittstående (standalone)</strong> – alt kjører lokalt på én maskin, uten tjener/nettverk</li>
 </ul>
+
+<h3>Sky & «everything as a service»</h3>
+<p>Skytjenester leverer ressurser over internett, betalt etter bruk. Tre hovedmodeller etter hvor mye du selv styrer:</p>
+<div class="mermaid">
+flowchart TB
+  I["IaaS – infrastruktur (VM, lagring, nett)"] --> P["PaaS – plattform (kjøremiljø, database)"] --> S["SaaS – ferdig app i nettleser"]
+</div>
+<ul>
+<li><strong>IaaS</strong> (Infrastructure as a Service): du styrer OS og oppover.</li>
+<li><strong>PaaS</strong> (Platform as a Service): du styrer bare appen og dataene.</li>
+<li><strong>SaaS</strong> (Software as a Service): ferdig app (f.eks. Gmail) – du styrer bare bruken.</li>
+</ul>
+<p><strong>Multi-tenant</strong> (mange kunder deler én instans) vs. <strong>multi-instance</strong> (egen instans per kunde). Fordeler: skalerbarhet, ingen egen maskinvare, betal-for-bruk. Ulemper: leverandøravhengighet (lock-in), mindre kontroll, personvern/datalokasjon.</p>
 
 <div class="callout exam"><strong>Eksamenstips:</strong> «Nevn 4 fordeler og 4 ulemper med mikrotjenester» er en gjenganger. Koble alltid arkitekturvalg til kvalitetsattributter (skalerbarhet, vedlikeholdbarhet, ytelse) og til organisasjonen (Conways lov).</div>
 `
@@ -238,7 +281,7 @@ flowchart LR
 {
   topic: "etikk",
   title: "Profesjonsetikk & personvern (GDPR)",
-  examNote: "På alle 4 eksamener, ofte som case. Kunne GDPR-prinsipper/rettigheter, DPIA, og profesjonsetikk (NITO).",
+  examNote: "På alle 4 eksamener, ofte som case. Kunne GDPR-prinsipper/rettigheter, DPIA, profesjonsetikk (NITO), programvaresikkerhet (CIA, autentisering/autorisasjon) og bærekraft (SusAF/SusAD).",
   html: `
 <p>Som systemutvikler har du et <strong>profesjonsetisk ansvar</strong> for konsekvensene av det du bygger – personvern, sikkerhet, rettferdighet og åpenhet.</p>
 
@@ -271,6 +314,28 @@ flowchart LR
 
 <h3>Profesjonsetikk</h3>
 <p>Retningslinjer (f.eks. <strong>NITO</strong>, ACM/IEEE) vektlegger: sett samfunnets og brukernes interesser først, vær ærlig om begrensninger, ivareta sikkerhet og kvalitet, unngå interessekonflikter. Etiske dilemmaer løses ved å veie hensyn mot hverandre og være åpen om valgene.</p>
+
+<h3>Programvaresikkerhet</h3>
+<p>Sikkerhet handler om å beskytte <strong>CIA-triaden</strong>: konfidensialitet (confidentiality), integritet (integrity) og tilgjengelighet (availability). Sentrale mekanismer:</p>
+<ul>
+<li><strong>Autentisering (authentication)</strong> – verifisere <em>hvem</em> brukeren er (passord, to-faktor/MFA).</li>
+<li><strong>Autorisasjon (authorization)</strong> – bestemme <em>hva</em> brukeren får lov til (tilgangskontroll).</li>
+<li><strong>Kryptering (encryption)</strong> – beskytte data i transitt (TLS) og i ro.</li>
+</ul>
+<p>Vanlige angrep: <strong>SQL-injeksjon</strong> (motvirkes med PreparedStatement), <strong>XSS</strong> (cross-site scripting – validér og escape input/output) og <strong>man-in-the-middle</strong> (motvirkes med TLS). Prinsipp: <strong>«security/privacy by design»</strong> – bygg inn sikkerhet og personvern fra start, ikke som et påheng til slutt.</p>
+
+<h3>Bærekraft – SusAF & SusAD</h3>
+<p><strong>SusAF (Sustainability Awareness Framework)</strong> hjelper teamet å vurdere bærekraftskonsekvensene av et system langs <strong>fem dimensjoner</strong>:</p>
+<div class="mermaid">
+flowchart TB
+  C(("System"))
+  C --> D1["Teknisk – levetid, vedlikehold"]
+  C --> D2["Økonomisk – verdi, kostnad"]
+  C --> D3["Sosial – relasjoner, tillit, samfunn"]
+  C --> D4["Individuell – helse, verdighet, ferdigheter"]
+  C --> D5["Miljømessig – energi, ressurser, klima"]
+</div>
+<p>Effektene vurderes i tre <strong>ordens-effekter</strong>: <strong>umiddelbare</strong> (1. – direkte av å lage/bruke systemet), <strong>muliggjørende</strong> (2. – indirekte, det systemet legger til rette for) og <strong>systemiske/strukturelle</strong> (3. – langsiktige samfunnsendringer). <strong>SusAD (Sustainability Awareness Diagram)</strong> er diagrammet som visualiserer disse effektene per dimensjon – resultatet av en SusAF-workshop.</p>
 
 <div class="callout exam"><strong>Eksamenstips:</strong> Case-oppgaver (f.eks. en app som samler mer data enn nødvendig) tester at du kan peke på <em>hvilke GDPR-prinsipper som brytes</em> og foreslå tiltak. Strukturer svaret: hva er problemet → hvilket prinsipp/rettighet → hva bør gjøres.</div>
 `
@@ -313,6 +378,33 @@ flowchart LR
 <ul>
 <li><strong>Low-fidelity:</strong> skisser, papir, wireframes (Balsamiq) – raskt og billig</li>
 <li><strong>High-fidelity:</strong> interaktivt, nær ferdig produkt – realistisk, men dyrere</li>
+</ul>
+
+<h3>Fem dimensjoner i interaksjonsdesign</h3>
+<p>Et interaksjonsdesign settes sammen av fem «byggeklosser» (Rogers/Sharp/Preece):</p>
+<ul>
+<li><strong>Ord (words):</strong> tekst, etiketter, knappenavn, menyer.</li>
+<li><strong>Visuelle representasjoner:</strong> bilder, ikoner, diagrammer, grafikk.</li>
+<li><strong>Fysiske objekter/rom:</strong> enheten og omgivelsene (mus, skjerm, telefon).</li>
+<li><strong>Tid:</strong> innhold som endrer seg over tid (animasjon, video, responstid).</li>
+<li><strong>Oppførsel (behaviour):</strong> hvordan systemet reagerer – handlinger og reaksjoner.</li>
+</ul>
+
+<h3>Prototyp-kategorier</h3>
+<ul>
+<li><strong>Horisontal:</strong> bred, men grunn – mange funksjoner vist overflatisk (oversikt over UI-et).</li>
+<li><strong>Vertikal:</strong> smal, men dyp – få funksjoner fullt implementert (test én flyt grundig).</li>
+<li><strong>Evolusjonær:</strong> bygges videre på og blir til slutt selve produktet.</li>
+<li><strong>Bruk-og-kast (throwaway):</strong> lages for å lære/teste, kastes etterpå.</li>
+</ul>
+
+<h3>Retningslinjer for mobildesign</h3>
+<ul>
+<li><strong>Responsivt / «mobile first»:</strong> tilpass layout til skjermstørrelse, design for liten skjerm først.</li>
+<li><strong>Fingervennlige trykkmål:</strong> store nok knapper (~44 px) med god avstand.</li>
+<li><strong>Minimalisme:</strong> vis det viktigste først – begrenset plass og oppmerksomhet.</li>
+<li><strong>Ytelse & kontekst:</strong> rask lasting, takler dårlig nett, tar hensyn til bruk «i farta».</li>
+<li><strong>Tilgjengelighet:</strong> kontrast, lesbar tekst, fungerer med zoom og skjermleser.</li>
 </ul>
 
 <div class="callout exam"><strong>Eksamenstips:</strong> Du kan bli bedt om å vurdere et reelt grensesnitt (f.eks. en nettside) opp mot Normans prinsipper, eller forklare hva prototyping er <em>for</em>. Bruk konkrete eksempler på synlighet/feedback.</div>
@@ -418,6 +510,12 @@ flowchart LR
 
 <h3>Heuristisk evaluering</h3>
 <p>Eksperter vurderer grensesnittet mot et sett heuristikker (f.eks. <strong>Nielsens 10</strong>: synlighet av systemstatus, samsvar med virkeligheten, brukerkontroll, konsistens, feilforebygging, gjenkjenning fremfor hukommelse, fleksibilitet, minimalistisk design, hjelp ved feil, hjelp/dokumentasjon). Billig og raskt, men fanger ikke alt ekte brukere ville møtt.</p>
+
+<h3>Flere ekspertbaserte gjennomganger</h3>
+<ul>
+<li><strong>Kognitiv gjennomgang (cognitive walkthrough):</strong> eksperter går steg for steg gjennom en oppgave og spør «vil en ny bruker skjønne hva som skal gjøres her – og se at det virket?» Fokus på <em>lærbarhet</em>.</li>
+<li><strong>Pluralistisk gjennomgang (pluralistic walkthrough):</strong> brukere, utviklere og eksperter går gjennom scenariene <em>sammen</em>, steg for steg, og diskuterer hvert steg – kombinerer flere perspektiver.</li>
+</ul>
 
 <div class="callout exam"><strong>Eksamenstips:</strong> Vit forskjellen på <em>brukertesting</em> (ekte brukere) og <em>heuristisk/ekspertevaluering</em>, og når hver passer. Personas + scenarier brukes for å holde fokus på brukerne i designvalg.</div>
 `

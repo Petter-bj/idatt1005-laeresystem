@@ -158,6 +158,44 @@ window.APP_DATA.examItems = [
   question:"Hva er personas og scenarier, og hvordan brukes de i brukersentrert utvikling?",
   model:"En <strong>persona</strong> er en oppdiktet, men realistisk brukerprofil (mål, behov, ferdigheter, frustrasjoner) som representerer en brukergruppe. Et <strong>scenario</strong> er en fortelling om hvordan en persona bruker systemet for å nå et mål. De brukes til å holde fokus på reelle brukere gjennom design, prioritere funksjonalitet, kommunisere behov i teamet og avdekke krav – kjernen i brukersentrert design.",
   sensor:["Korrekt definisjon av persona og scenario","Hvordan de styrer designvalg/krav","Kobling til brukersentrert/iterativ prosess"]
+},
+
+/* ===== TILLEGG: pensumhull ===== */
+{
+  id:"xet4", examYear:"V2023", topic:"etikk",
+  question:"Drøft hvordan en systemutvikler kan ivareta sikkerhet og personvern i en webapplikasjon som håndterer brukerkontoer.",
+  model:"<strong>Sikkerhet (CIA):</strong> sikker <em>autentisering</em> (gjerne to-faktor) og <em>autorisasjon</em> med minste privilegium. Lagre passord kun som saltet hash (f.eks. bcrypt), aldri klartekst. Krypter data i transitt med HTTPS/TLS, og sensitive data i ro. Beskytt mot vanlige angrep: <code>PreparedStatement</code> mot SQL-injeksjon, validering/escaping mot XSS. <strong>Personvern (GDPR):</strong> dataminimering, formålsbegrensning, lagringsbegrensning og gyldig behandlingsgrunnlag/samtykke. Bygg inn <em>security/privacy by design</em> fra start, og vurder DPIA ved høy risiko.",
+  sensor:["Nevner både autentisering og autorisasjon","Konkrete tiltak: hashing, TLS, mot SQL-injeksjon/XSS","Kobler til GDPR-prinsipper og «by design»"]
+},
+{
+  id:"xet5", examYear:"Pensum", topic:"etikk",
+  question:"Forklar Sustainability Awareness Framework (SusAF), og gi eksempler på bærekraftseffekter et system kan ha i de ulike dimensjonene.",
+  model:"SusAF bevisstgjør bærekraftskonsekvenser langs fem dimensjoner: <strong>teknisk</strong> (vedlikeholdbarhet/levetid vs. teknisk gjeld), <strong>økonomisk</strong> (verdiskaping, driftskostnad), <strong>sosial</strong> (tillit, fellesskap, maktforhold), <strong>individuell</strong> (helse, ferdigheter, autonomi) og <strong>miljømessig</strong> (energiforbruk, e-avfall). Effektene vurderes som <em>umiddelbare</em>, <em>muliggjørende</em> og <em>systemiske</em>, og dokumenteres i et <strong>SusAD</strong>-diagram. Brukes typisk i en workshop tidlig i prosjektet for å avdekke utilsiktede konsekvenser.",
+  sensor:["De fem dimensjonene korrekt","Konkret effekt-eksempel i flere dimensjoner","Nevner ordens-effekter og/eller SusAD"]
+},
+{
+  id:"xmm4", examYear:"V2023", topic:"mmi",
+  question:"Gjør rede for sentrale retningslinjer man bør følge når man designer brukergrensesnitt for mobil.",
+  model:"<strong>Responsivt / «mobile first»:</strong> design for liten skjerm først og tilpass til større. <strong>Fingervennlig:</strong> store nok trykkmål (~44 px) med god avstand. <strong>Minimalisme/prioritering:</strong> begrenset plass og oppmerksomhet – vis det viktigste først, unngå rot. <strong>Ytelse og kontekst:</strong> rask lasting, takler dårlig nett, tar hensyn til bruk «i farta» og avbrytelser. <strong>Tilgjengelighet:</strong> god kontrast, lesbar tekst, fungerer med zoom og skjermleser. Utnytt mobilens muligheter (touch, GPS), men respekter personvern.",
+  sensor:["Responsivt / mobile first","Fingervennlige mål + minimalisme","Ytelse/kontekst + tilgjengelighet"]
+},
+{
+  id:"xar5", examYear:"Pensum", topic:"arkitektur",
+  question:"Forklar forskjellen på IaaS, PaaS og SaaS, og drøft fordeler og ulemper med å bruke skytjenester.",
+  model:"<strong>IaaS:</strong> virtuell infrastruktur (VM, lagring, nett) – du styrer OS og oppover. <strong>PaaS:</strong> ferdig plattform/kjøremiljø – du styrer appen og dataene. <strong>SaaS:</strong> ferdig applikasjon over nett (f.eks. Gmail) – du styrer bare bruken. <strong>Fordeler:</strong> skalerbarhet/elastisitet, ingen egen maskinvare, betal-for-bruk, rask oppstart, høy tilgjengelighet. <strong>Ulemper:</strong> leverandøravhengighet (lock-in), mindre kontroll, løpende kostnader, og personvern/datalokasjon (hvor lagres dataene?).",
+  sensor:["Riktig skille IaaS/PaaS/SaaS","Minst 3 fordeler","Minst 3 ulemper inkl. lock-in/personvern"]
+},
+{
+  id:"xdb1", examYear:"Øving", topic:"databaser",
+  question:"Forklar trinnene for å hente data fra en relasjonsdatabase med JDBC, og hvorfor man bør bruke PreparedStatement.",
+  model:"Trinn: 1) <code>DriverManager.getConnection(url, bruker, pw)</code> gir en <strong>Connection</strong>. 2) Lag en <strong>PreparedStatement</strong> med parameterisert SQL. 3) Sett parametere og kall <code>executeQuery()</code>. 4) Les resultatet rad for rad fra <strong>ResultSet</strong>. 5) Lukk ressurser (try-with-resources). <strong>PreparedStatement</strong> sender SQL-struktur og data hver for seg → hindrer SQL-injeksjon og gir bedre ytelse ved gjenbruk.",
+  sensor:["Riktig JDBC-flyt (Connection → PreparedStatement → ResultSet)","Nevner lukking av ressurser","Forklarer PreparedStatement mot SQL-injeksjon"]
+},
+{
+  id:"xdb2", examYear:"Øving", topic:"databaser",
+  question:"Hva er CRUD, og hvilke SQL-setninger hører til hver av operasjonene?",
+  model:"CRUD er de fire grunnoperasjonene mot data: <strong>Create</strong> → <code>INSERT</code>, <strong>Read</strong> → <code>SELECT</code>, <strong>Update</strong> → <code>UPDATE</code>, <strong>Delete</strong> → <code>DELETE</code>. Til sammen dekker de livssyklusen til en rad/post i databasen.",
+  sensor:["Alle fire CRUD-operasjoner","Riktig SQL-setning til hver"]
 }
 
 ];

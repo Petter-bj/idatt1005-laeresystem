@@ -170,6 +170,44 @@ window.APP_DATA.flashcards = [
 { id:"fdb5", topic:"databaser", front:"PreparedStatement", back:"Parameterisert SQL som hindrer SQL-injeksjon og kan gjenbrukes." },
 { id:"fdb6", topic:"databaser", front:"ResultSet", back:"Resultatet av en spørring; itereres rad for rad." },
 { id:"fdb7", topic:"databaser", front:"CRUD", back:"Create, Read, Update, Delete – grunnoperasjonene mot data." },
-{ id:"fdb8", topic:"databaser", front:"SQL-injeksjon", back:"Angrep der ondsinnet input endrer SQL-setningen; motvirkes av PreparedStatement." }
+{ id:"fdb8", topic:"databaser", front:"SQL-injeksjon", back:"Angrep der ondsinnet input endrer SQL-setningen; motvirkes av PreparedStatement." },
+
+/* ===== TILLEGG: pensumhull ===== */
+{ id:"fme27", topic:"metodikk", front:"XP – de fem verdiene", back:"Kommunikasjon, enkelhet, tilbakemelding, mot, respekt (communication, simplicity, feedback, courage, respect)." },
+{ id:"fme28", topic:"metodikk", front:"DevOps", back:"Kultur/praksis som bygger bro mellom utvikling (Dev) og drift (Ops): versjonskontroll, CI og CD via automatisert pipeline." },
+{ id:"fme29", topic:"metodikk", front:"Kontinuerlig leveranse/utrulling (CD)", back:"Automatisk klargjøring (og ev. utrulling) av hver endring til produksjon etter at CI-bygg og tester er grønne." },
+{ id:"fme30", topic:"metodikk", front:"Felles språk (ubiquitous language, DDD)", back:"Et delt, presist vokabular mellom utviklere og domeneeksperter som også brukes direkte i koden." },
+
+{ id:"fte22", topic:"testing", front:"Testfaser (en tests livssyklus)", back:"Oppsett (setup) → gjennomføring (exercise) → verifisering (verify) → opprydding (teardown)." },
+{ id:"fte23", topic:"testing", front:"Destruktiv testing", back:"Tester bevisst med ugyldige/ekstreme input for å se hvor robust systemet er og hvordan det feiler." },
+{ id:"fte24", topic:"testing", front:"Fixture (testing)", back:"Kjent, gjenbrukbar starttilstand/testdata som en test settes opp med." },
+{ id:"fte25", topic:"testing", front:"Testmiljø", back:"Isolert miljø (ikke produksjon) der tester kjøres med kontrollerte, deterministiske data." },
+{ id:"fte26", topic:"testing", front:"Dependency Injection (DI) i testing", back:"Injiser avhengigheter utenfra, så de kan byttes ut med mocks/stubs under testing → testbar kode." },
+{ id:"fte27", topic:"testing", front:"Agile Testing Quadrants", back:"Modell som ordner tester etter teknologi/forretning og støtte/kritikk: Q1 enhet, Q2 funksjonell, Q3 utforskende, Q4 ytelse/sikkerhet." },
+
+{ id:"far16", topic:"arkitektur", front:"Master–slave-mønster", back:"Én master styrer/fordeler arbeid til flere slaver (f.eks. master skriver, slaver leser)." },
+{ id:"far17", topic:"arkitektur", front:"Rør og filter (pipe-filter)", back:"Data flyter gjennom en kjede av filtre som hver transformerer dataene (jf. Unix-pipes)." },
+{ id:"far18", topic:"arkitektur", front:"Broker (megler)", back:"En mellommann som kobler klienter og tjenester og ruter forespørsler (jf. message broker)." },
+{ id:"far19", topic:"arkitektur", front:"Frittstående (standalone)", back:"Alt kjører lokalt på én maskin uten tjener/nettverk." },
+{ id:"far20", topic:"arkitektur", front:"SaaS (Software as a Service)", back:"Ferdig programvare levert over nett (f.eks. Gmail); du styrer bare bruken." },
+{ id:"far21", topic:"arkitektur", front:"PaaS (Platform as a Service)", back:"Plattform/kjøremiljø i skyen; du styrer appen og dataene, ikke OS/infrastruktur." },
+{ id:"far22", topic:"arkitektur", front:"IaaS (Infrastructure as a Service)", back:"Virtuell infrastruktur (VM, lagring, nett) i skyen; du styrer OS og oppover." },
+{ id:"far23", topic:"arkitektur", front:"Multi-tenant vs. multi-instance", back:"Multi-tenant: mange kunder deler én instans. Multi-instance: egen instans per kunde." },
+
+{ id:"fmm18", topic:"mmi", front:"Fem dimensjoner i interaksjonsdesign", back:"Ord, visuelle representasjoner, fysiske objekter/rom, tid, oppførsel." },
+{ id:"fmm19", topic:"mmi", front:"Horisontal vs. vertikal prototype", back:"Horisontal: mange funksjoner, grunt. Vertikal: få funksjoner, dypt/fullt implementert." },
+{ id:"fmm20", topic:"mmi", front:"Evolusjonær vs. bruk-og-kast-prototype", back:"Evolusjonær bygges videre til selve produktet; bruk-og-kast lages for å lære og kastes etterpå." },
+{ id:"fmm21", topic:"mmi", front:"«Mobile first» / responsivt design", back:"Design for liten skjerm først, og la layouten tilpasse seg større skjermer." },
+
+{ id:"fbs11", topic:"brukersentrert", front:"Kognitiv gjennomgang (cognitive walkthrough)", back:"Eksperter går steg for steg gjennom en oppgave og vurderer om en ny bruker forstår hvert steg (lærbarhet)." },
+{ id:"fbs12", topic:"brukersentrert", front:"Pluralistisk gjennomgang (pluralistic walkthrough)", back:"Brukere, utviklere og eksperter går gjennom scenarier sammen og diskuterer hvert steg." },
+
+{ id:"fet15", topic:"etikk", front:"CIA-triaden", back:"Konfidensialitet, integritet og tilgjengelighet – de tre grunnpilarene i informasjonssikkerhet." },
+{ id:"fet16", topic:"etikk", front:"Autentisering vs. autorisasjon", back:"Autentisering = hvem du er (innlogging). Autorisasjon = hva du får lov til (tilgangskontroll)." },
+{ id:"fet17", topic:"etikk", front:"XSS (cross-site scripting)", back:"Angrep der skadelig skript injiseres i nettsider; motvirkes ved å validere og escape input/output." },
+{ id:"fet18", topic:"etikk", front:"SusAF (Sustainability Awareness Framework)", back:"Rammeverk for å vurdere bærekraft langs 5 dimensjoner (teknisk, økonomisk, sosial, individuell, miljømessig) × 3 ordens-effekter." },
+{ id:"fet19", topic:"etikk", front:"SusAD (Sustainability Awareness Diagram)", back:"Diagrammet som visualiserer et systems bærekraftseffekter per dimensjon – resultatet av en SusAF-workshop." },
+{ id:"fet20", topic:"etikk", front:"Ordens-effekter (bærekraft)", back:"Umiddelbare (1.), muliggjørende/indirekte (2.) og systemiske/strukturelle (3.) effekter av et system." },
+{ id:"fet21", topic:"etikk", front:"Security/privacy by design", back:"Bygg inn sikkerhet og personvern fra start av designet, ikke som et påheng til slutt." }
 
 ];
