@@ -88,15 +88,16 @@ const server = http.createServer((req, res) => {
       if (!ans.trim()) return send(res, 400, JSON.stringify({ error: "Tomt svar" }), TYPES[".json"]);
 
       // execFile med arg-array => trygt mot shell-injeksjon
-      execFile("claude", ["-p", buildPrompt(q, model, ans)],
+      const child = execFile("claude", ["-p", buildPrompt(q, model, ans)],
         { timeout: 120000, maxBuffer: 4 * 1024 * 1024, cwd: ROOT },
         (err, stdout, stderr) => {
-          if (err) {
+          if (err && !String(stdout).trim()) {
             const msg = (stderr || err.message || "claude-feil").toString().slice(0, 400);
             return send(res, 500, JSON.stringify({ error: msg }), TYPES[".json"]);
           }
           send(res, 200, JSON.stringify({ feedback: String(stdout).trim() }), TYPES[".json"]);
         });
+      if (child.stdin) child.stdin.end(); // lukk stdin (= < /dev/null) så claude ikke venter på input
     });
     return;
   }
@@ -115,15 +116,16 @@ const server = http.createServer((req, res) => {
       })) : [];
       if (!msgs.length) return send(res, 400, JSON.stringify({ error: "Ingen melding" }), TYPES[".json"]);
 
-      execFile("claude", ["-p", buildChatPrompt(ctx, msgs)],
+      const child = execFile("claude", ["-p", buildChatPrompt(ctx, msgs)],
         { timeout: 120000, maxBuffer: 4 * 1024 * 1024, cwd: ROOT },
         (err, stdout, stderr) => {
-          if (err) {
+          if (err && !String(stdout).trim()) {
             const msg = (stderr || err.message || "claude-feil").toString().slice(0, 400);
             return send(res, 500, JSON.stringify({ error: msg }), TYPES[".json"]);
           }
           send(res, 200, JSON.stringify({ reply: String(stdout).trim() }), TYPES[".json"]);
         });
+      if (child.stdin) child.stdin.end(); // lukk stdin (= < /dev/null) så claude ikke venter på input
     });
     return;
   }
