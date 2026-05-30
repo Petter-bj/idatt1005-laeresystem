@@ -28,9 +28,12 @@
       var cards = pool(t.id);
       if (!cards.length) return;
       var st = Progress.cardStats(cards.map(function (c) { return c.id; }));
+      var label = !st.seen ? (st.total + " kort")
+        : st.progress >= 100 ? "Mestret ✓"
+        : st.progress + "% lært · " + st.seen + "/" + st.total + " sett";
       grid.appendChild(App.h("button", { class: "pick", onclick: function () { App.navigate("#/flashcards/" + t.id); } }, [
         App.h("span", { class: "p-name" }, t.name),
-        App.h("span", { class: "badge" }, st.mastered + "/" + st.total + " mestret")
+        App.h("span", { class: "badge", title: st.mastered + " av " + st.total + " kort er mestret (boks 5)" }, label)
       ]));
     });
     root.appendChild(grid);

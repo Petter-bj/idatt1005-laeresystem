@@ -62,12 +62,17 @@
     },
     cardStats: function (allIds) {
       var s = defaults(load());
-      var mastered = 0, seen = 0;
+      var mastered = 0, seen = 0, boxSum = 0;
       allIds.forEach(function (id) {
         var c = s.cards[id];
-        if (c) { seen++; if (c.box >= 5) mastered++; }
+        var box = c ? c.box : 1;
+        boxSum += (box - 1);               // 0..4 per kort = læringsstyrke (boks 1 = 0)
+        if (c) { seen++; if (box >= 5) mastered++; }
       });
-      return { mastered: mastered, seen: seen, total: allIds.length };
+      var total = allIds.length;
+      // Finkornet fremgang: beveger seg etter HVER økt, ikke bare når et kort når boks 5
+      var progress = total ? Math.round(boxSum / (total * 4) * 100) : 0;
+      return { mastered: mastered, seen: seen, total: total, progress: progress };
     },
 
     /* ---- Eksamen ---- */
