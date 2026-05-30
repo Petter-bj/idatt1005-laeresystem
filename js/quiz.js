@@ -70,14 +70,17 @@
   /* ---- Flervalg ---- */
   function renderMc(card, q) {
     if (!q.options || !q.options.length) { renderOpen(card, { q: q.q, model: q.explain || "(spørsmålet mangler alternativer)" }); return; }
+    // Stokk alternativene tilfeldig hver gang, så fasit ikke alltid er lengst / på samme plass
+    var order = App.shuffle(q.options.map(function (_, i) { return i; }));
+    var correctPos = order.indexOf(q.correct);
     var selected = -1, locked = false;
     var optWrap = App.h("div", { class: "options", role: "group", "aria-label": "Svaralternativer" });
     var btns = [];
-    q.options.forEach(function (opt, i) {
-      var b = App.h("button", { class: "option", "aria-pressed": "false" }, [App.h("span", { class: "mark" }, String.fromCharCode(65 + i) + "."), opt]);
+    order.forEach(function (origIdx, pos) {
+      var b = App.h("button", { class: "option", "aria-pressed": "false" }, [App.h("span", { class: "mark" }, String.fromCharCode(65 + pos) + "."), q.options[origIdx]]);
       b.addEventListener("click", function () {
         if (locked) return;
-        selected = i;
+        selected = pos;
         btns.forEach(function (x) { x.classList.remove("selected"); x.setAttribute("aria-pressed", "false"); });
         b.classList.add("selected");
         b.setAttribute("aria-pressed", "true");
@@ -94,16 +97,16 @@
     checkBtn.addEventListener("click", function () {
       if (locked || selected < 0) return;
       locked = true;
-      btns.forEach(function (x, i) {
+      btns.forEach(function (x, pos) {
         x.disabled = true;
-        if (i === q.correct) x.classList.add("correct");
-        else if (i === selected) x.classList.add("wrong");
+        if (pos === correctPos) x.classList.add("correct");
+        else if (pos === selected) x.classList.add("wrong");
       });
-      var ok = selected === q.correct;
+      var ok = selected === correctPos;
       if (ok) session.correct++;
       card.appendChild(App.h("div", { class: "explain" }, [
         App.h("strong", {}, ok ? "Riktig! " : "Ikke helt. "),
-        q.explain || ("Riktig svar: " + String.fromCharCode(65 + q.correct) + ".")
+        q.explain || ("Riktig svar: " + String.fromCharCode(65 + correctPos) + ".")
       ]));
       replaceWithNext(card);
     });
