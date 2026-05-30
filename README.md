@@ -17,7 +17,7 @@ Merk: den hostede versjonen kjører alt **unntatt** Claude-funksjonene (se under
 ## Funksjoner
 
 - **Lær** – konsise temasammendrag for alle 10 temaer, med diagrammer (Mermaid) og eksamensrelevans
-- **Quiz** – 135 spørsmål (flervalg + åpne), 5 om gangen med fasit og forklaring
+- **Quiz** – 174 spørsmål: 113 flervalg + 61 åpne (fritekst, rettes av Claude når broen kjører), 5 om gangen med fasit og forklaring
 - **Flashcards** – 180 begreper med spaced repetition (Leitner-bokser)
 - **UML-øving** – scenario → tegn selv → fasit
 - **Eksamenstrening** – tidligere oppgaver med modellsvar + simulert eksamen på tid
