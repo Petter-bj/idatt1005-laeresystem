@@ -213,6 +213,7 @@
     root.appendChild(h("div", { class: "btn-row", style: "margin-top:10px" }, [
       h("a", { class: "btn secondary", href: "#/flashcards" }, "🃏 Flashcards"),
       h("a", { class: "btn secondary", href: "#/uml" }, "📐 UML-øving"),
+      h("a", { class: "btn ghost", href: "#/quiz/evig" }, "♾️ Endeløs drill"),
       h("a", { class: "btn ghost", href: "#/eksamen/simulert" }, "⏱ Simulert eksamen (3 t)")
     ]));
 

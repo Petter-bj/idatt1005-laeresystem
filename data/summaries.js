@@ -98,6 +98,17 @@ flowchart LR
   html: `
 <p><strong>Testing</strong> handler om å avdekke feil (defects) og verifisere at systemet oppfyller kravene. Mål: redusere risiko, ikke «bevise at alt er feilfritt».</p>
 
+<h3>De 7 testprinsippene (ISTQB)</h3>
+<ol>
+<li><strong>Testing viser at feil finnes</strong> – tester kan avdekke feil, men aldri bevise at det <em>ikke</em> finnes flere.</li>
+<li><strong>Uttømmende testing er umulig</strong> – man kan ikke teste alle input og veier; prioritér ut fra risiko.</li>
+<li><strong>Tidlig testing</strong> – start å teste så tidlig som mulig; feil funnet sent er mye dyrere å rette.</li>
+<li><strong>Feil klumper seg sammen (defect clustering)</strong> – de fleste feilene sitter typisk i få moduler.</li>
+<li><strong>Pesticid-paradokset (pesticide paradox)</strong> – kjører du de samme testene om igjen, slutter de å finne nye feil; testene må fornyes.</li>
+<li><strong>Testing er kontekstavhengig</strong> – en nettbank testes annerledes enn et spill.</li>
+<li><strong>«Fravær av feil»-feilslutningen (absence-of-errors fallacy)</strong> – et system uten kjente feil er likevel verdiløst hvis det ikke møter brukerens behov.</li>
+</ol>
+
 <h3>Testnivåer (test levels)</h3>
 <div class="mermaid">
 flowchart BT
@@ -119,7 +130,7 @@ flowchart BT
 <li><strong>Smoke/sanity:</strong> rask sjekk av at hovedfunksjoner i det hele tatt virker.</li>
 <li><strong>Utforskende test (exploratory):</strong> manuell, lærende testing uten forhåndsskrevne caser.</li>
 <li><strong>Brukervennlighetstest (usability):</strong> ekte brukere løser oppgaver.</li>
-<li><strong>Ytelse/last/stress (performance/load/stress)</strong> og <strong>spike-test:</strong> oppførsel under belastning.</li>
+<li><strong>Ytelse/last/stress (performance/load/stress)</strong>, <strong>spike-test</strong> (plutselig topplast) og <strong>utholdenhetstest (endurance/soak)</strong> – jevn last over lang tid for å avdekke minnelekkasjer og gradvis degradering: oppførsel under belastning.</li>
 </ul>
 
 <h3>TDD vs. BDD</h3>
@@ -210,6 +221,7 @@ flowchart LR
 <ul>
 <li><strong>Klient–tjener (client–server)</strong></li>
 <li><strong>Hendelsesdrevet (event-driven)</strong> – komponenter reagerer på hendelser</li>
+<li><strong>Hendelsesbuss (event-bus)</strong> – kilder (source) publiserer hendelser på kanaler i en buss, og lyttere (listeners) abonnerer på de kanalene de bryr seg om → svært løs kobling; komponentene kjenner ikke hverandre</li>
 <li><strong>Plugin / mikrokjerne</strong> – kjerne + utvidelser</li>
 <li><strong>Peer-to-peer</strong> – likeverdige noder</li>
 <li><strong>SOA</strong> – tjenesteorientert, forløper til mikrotjenester</li>
@@ -314,6 +326,17 @@ flowchart LR
 
 <h3>Profesjonsetikk</h3>
 <p>Retningslinjer (f.eks. <strong>NITO</strong>, ACM/IEEE) vektlegger: sett samfunnets og brukernes interesser først, vær ærlig om begrensninger, ivareta sikkerhet og kvalitet, unngå interessekonflikter. Etiske dilemmaer løses ved å veie hensyn mot hverandre og være åpen om valgene.</p>
+<p>Den internasjonale <strong>ACM/IEEE Software Engineering Code of Ethics</strong> samler dette i <strong>åtte prinsipper</strong> – hvem og hva en programvareingeniør skal ta hensyn til:</p>
+<ol>
+<li><strong>Samfunn (public)</strong> – handle i offentlighetens interesse.</li>
+<li><strong>Klient &amp; arbeidsgiver</strong> – handle til deres beste, forenlig med samfunnets interesse.</li>
+<li><strong>Produkt</strong> – sikre at produkter holder høyest mulige profesjonelle standarder.</li>
+<li><strong>Vurdering (judgment)</strong> – bevar integritet og uavhengighet i faglige vurderinger.</li>
+<li><strong>Ledelse (management)</strong> – fremme en etisk tilnærming til styring av utvikling og vedlikehold.</li>
+<li><strong>Profesjon</strong> – styrk profesjonens integritet og omdømme.</li>
+<li><strong>Kolleger</strong> – vær rettferdig mot og støtt kollegene dine.</li>
+<li><strong>Selv (identitet)</strong> – delta i livslang læring og fremme en etisk holdning til yrket.</li>
+</ol>
 
 <h3>Programvaresikkerhet</h3>
 <p>Sikkerhet handler om å beskytte <strong>CIA-triaden</strong>: konfidensialitet (confidentiality), integritet (integrity) og tilgjengelighet (availability). Sentrale mekanismer:</p>

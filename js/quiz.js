@@ -10,17 +10,19 @@
   }
 
   function route(root, parts) {
-    if (parts.length && (parts[0] === "blandet" || App.topicById(parts[0]))) start(root, parts[0]);
+    if (parts.length && (parts[0] === "evig" || parts[0] === "blandet" || App.topicById(parts[0]))) start(root, parts[0]);
     else setup(root);
   }
 
   /* ---- Oppsett ---- */
   function setup(root) {
     root.appendChild(App.h("h1", {}, "Quiz"));
-    root.appendChild(App.h("p", { class: "lead" }, "5 spørsmål om gangen. Du får fasit og forklaring etter hvert spørsmål. Velg et tema eller ta en blandet runde."));
+    root.appendChild(App.h("p", { class: "lead" }, "Du får fasit og forklaring etter hvert spørsmål. Ta et enkelt tema, en blandet runde på 5, eller en endeløs drill fra alle temaer."));
 
-    root.appendChild(App.h("button", { class: "btn block", style: "margin-bottom:16px", onclick: function () { App.navigate("#/quiz/blandet"); } },
-      "🎲 Blandet quiz (alle temaer)"));
+    root.appendChild(App.h("button", { class: "btn block", style: "margin-bottom:10px", onclick: function () { App.navigate("#/quiz/blandet"); } },
+      "🎲 Blandet runde (5 spørsmål, alle temaer)"));
+    root.appendChild(App.h("button", { class: "btn block secondary", style: "margin-bottom:16px", onclick: function () { App.navigate("#/quiz/evig"); } },
+      "♾️ Endeløs drill (alle temaer, til du avslutter)"));
 
     var grid = App.h("div", { class: "pickgrid" });
     App.TOPICS.forEach(function (t) {
@@ -37,10 +39,16 @@
 
   /* ---- Start runde ---- */
   function start(root, topicId) {
-    var p = pool(topicId);
+    var endless = topicId === "evig";
+    var p = endless ? pool("blandet") : pool(topicId);
     if (!p.length) { setup(root); return; }
-    var qs = App.shuffle(p).slice(0, Math.min(5, p.length));
-    session = { root: root, topicId: topicId, qs: qs, idx: 0, correct: 0, answered: false };
+    if (endless) {
+      // Endeløs drill: stokk hele banken, gå gjennom den, reshuffle når tom – aldri resultatskjerm
+      session = { root: root, topicId: topicId, endless: true, qs: App.shuffle(p), idx: 0, correct: 0, answered: 0 };
+    } else {
+      var qs = App.shuffle(p).slice(0, Math.min(5, p.length));
+      session = { root: root, topicId: topicId, qs: qs, idx: 0, correct: 0, answered: false };
+    }
     renderQuestion();
   }
 
@@ -48,15 +56,28 @@
   function renderQuestion() {
     var root = session.root; App.clear(root);
     var q = session.qs[session.idx];
-    var topicLabel = session.topicId === "blandet" ? "Blandet" : App.topicName(session.topicId);
 
-    root.appendChild(App.backlink("#/quiz", "Avslutt quiz"));
-    root.appendChild(App.h("div", { class: "qmeta" }, [
-      App.h("span", {}, topicLabel + (session.topicId === "blandet" ? " · " + App.topicName(q.topic) : "")),
-      App.h("span", {}, "Spørsmål " + (session.idx + 1) + " av " + session.qs.length)
-    ]));
-    root.appendChild(App.h("div", { class: "progress", style: "margin-bottom:18px" },
-      App.h("span", { style: "width:" + ((session.idx) / session.qs.length * 100) + "%" })));
+    if (session.endless) {
+      root.appendChild(App.backlink("#/quiz", "Avslutt drill"));
+      root.appendChild(App.h("div", { class: "qmeta" }, [
+        App.h("span", {}, "Endeløs drill · " + App.topicName(q.topic)),
+        App.h("span", {}, "Spørsmål " + (session.answered + 1))
+      ]));
+      var pct = session.answered ? Math.round(session.correct / session.answered * 100) : 0;
+      root.appendChild(App.h("p", { class: "muted", style: "margin:-4px 0 18px" },
+        session.answered
+          ? ("✓ " + session.correct + " riktige av " + session.answered + " besvart (" + pct + "%)")
+          : "Tilfeldige spørsmål fra alle temaer – kjører til du avslutter."));
+    } else {
+      var topicLabel = session.topicId === "blandet" ? "Blandet" : App.topicName(session.topicId);
+      root.appendChild(App.backlink("#/quiz", "Avslutt quiz"));
+      root.appendChild(App.h("div", { class: "qmeta" }, [
+        App.h("span", {}, topicLabel + (session.topicId === "blandet" ? " · " + App.topicName(q.topic) : "")),
+        App.h("span", {}, "Spørsmål " + (session.idx + 1) + " av " + session.qs.length)
+      ]));
+      root.appendChild(App.h("div", { class: "progress", style: "margin-bottom:18px" },
+        App.h("span", { style: "width:" + ((session.idx) / session.qs.length * 100) + "%" })));
+    }
 
     var card = App.h("div", { class: "card" });
     card.appendChild(App.h("div", { class: "quiz-q" }, q.q));
@@ -144,12 +165,19 @@
   }
 
   function replaceWithNext(card) {
-    var isLast = session.idx === session.qs.length - 1;
+    var isLast = !session.endless && session.idx === session.qs.length - 1;
     card.appendChild(App.h("div", { class: "btn-row" },
       App.h("button", { class: "btn", onclick: next }, isLast ? "Se resultat →" : "Neste spørsmål →")));
   }
 
   function next() {
+    if (session.endless) {
+      session.answered++;
+      session.idx++;
+      if (session.idx >= session.qs.length) { session.qs = App.shuffle(session.qs); session.idx = 0; } // ny stokk-runde
+      renderQuestion();
+      return;
+    }
     if (session.idx < session.qs.length - 1) { session.idx++; renderQuestion(); }
     else result();
   }

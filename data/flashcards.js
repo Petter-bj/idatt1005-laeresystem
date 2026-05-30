@@ -208,6 +208,15 @@ window.APP_DATA.flashcards = [
 { id:"fet18", topic:"etikk", front:"SusAF (Sustainability Awareness Framework)", back:"Rammeverk for å vurdere bærekraft langs 5 dimensjoner (teknisk, økonomisk, sosial, individuell, miljømessig) × 3 ordens-effekter." },
 { id:"fet19", topic:"etikk", front:"SusAD (Sustainability Awareness Diagram)", back:"Diagrammet som visualiserer et systems bærekraftseffekter per dimensjon – resultatet av en SusAF-workshop." },
 { id:"fet20", topic:"etikk", front:"Ordens-effekter (bærekraft)", back:"Umiddelbare (1.), muliggjørende/indirekte (2.) og systemiske/strukturelle (3.) effekter av et system." },
-{ id:"fet21", topic:"etikk", front:"Security/privacy by design", back:"Bygg inn sikkerhet og personvern fra start av designet, ikke som et påheng til slutt." }
+{ id:"fet21", topic:"etikk", front:"Security/privacy by design", back:"Bygg inn sikkerhet og personvern fra start av designet, ikke som et påheng til slutt." },
+
+/* ===================== TILLEGG: fra Eksamensøving-PDF ===================== */
+{ id:"fte28", topic:"testing", front:"Defect clustering", back:"Testprinsipp: de fleste feilene samler seg i et fåtall moduler – fokusér testingen der." },
+{ id:"fte29", topic:"testing", front:"Pesticid-paradokset (pesticide paradox)", back:"Gjentar du de samme testene, finner de færre nye feil over tid; testene må fornyes og varieres." },
+{ id:"fte30", topic:"testing", front:"«Fravær av feil»-feilslutningen", back:"Et system uten kjente feil er likevel verdiløst hvis det ikke møter brukerens behov." },
+{ id:"fte31", topic:"testing", front:"Utholdenhetstest (endurance/soak)", back:"Jevn last over lang tid for å avdekke minnelekkasjer og gradvis ytelsesdegradering." },
+{ id:"fte32", topic:"testing", front:"De 7 testprinsippene (ISTQB)", back:"1) Feil finnes (kan ikke bevise fravær), 2) uttømmende testing umulig, 3) tidlig testing, 4) defect clustering, 5) pesticid-paradokset, 6) kontekstavhengig, 7) fravær-av-feil-feilslutningen." },
+{ id:"far24", topic:"arkitektur", front:"Event-bus (hendelsesbuss)", back:"Kilder (source) publiserer hendelser på kanaler i en buss; lyttere (listeners) abonnerer på kanaler. Svært løs kobling – komponentene kjenner ikke hverandre." },
+{ id:"fet22", topic:"etikk", front:"ACM/IEEE Code of Ethics (8 prinsipper)", back:"Samfunn, klient/arbeidsgiver, produkt, vurdering, ledelse, profesjon, kolleger, selv. Samfunnets interesse veier tyngst." }
 
 ];
